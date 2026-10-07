@@ -6,6 +6,7 @@ import { TarjetaAlumno } from './components/TarjetaAlumno';
 
 export default function App() {
   const [nombre, setNombre] = useState('');
+  const [carrera, setCarrera] = useState('Ingeniería en Sistemas'); // <--- 1. Estado para la carrera
   const [calificacion, setCalificacion] = useState('');
   const [listaAlumnos, setListaAlumnos] = useState([]);
   const [mensajeEstado, setMensajeEstado] = useState('');
@@ -22,12 +23,13 @@ export default function App() {
     const nuevoAlumno = {
       id: Date.now().toString(),
       nombre,
+      carrera, // <--- 2. Incluir carrera en el nuevo registro
       calificacion: nota,
       estado,
     };
 
     setListaAlumnos([...listaAlumnos, nuevoAlumno]);
-    setMensajeEstado(`✅ Alumno ${nombre} registrado como ${estado}.`);
+    setMensajeEstado(`✅ Alumno ${nombre} (${carrera}) registrado como ${estado}.`);
     setNombre('');
     setCalificacion('');
   };
@@ -40,6 +42,8 @@ export default function App() {
       <FormularioAlumno
         nombre={nombre}
         setNombre={setNombre}
+        carrera={carrera}          // <--- 3. Pasar estado de carrera
+        setCarrera={setCarrera}    // <--- 4. Pasar función para actualizar carrera
         calificacion={calificacion}
         setCalificacion={setCalificacion}
         onAgregar={agregarAlumno}
@@ -48,7 +52,6 @@ export default function App() {
 
       <Text style={styles.subtitulo}>Lista de Alumnos Registrados</Text>
       <View>
-        {/* Estructura Iterativa (.map) que renderiza el componente TarjetaAlumno */}
         {listaAlumnos.length === 0 ? (
           <Text style={styles.textoVacio}>No hay alumnos registrados aún.</Text>
         ) : (

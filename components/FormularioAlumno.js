@@ -22,7 +22,6 @@ export const FormularioAlumno = ({
         onChangeText={setNombre}
       />
 
-      {/* Componente Modular Independiente de Carrera */}
       <CarrerasSelector 
         carreraSeleccionada={carrera} 
         setCarrera={setCarrera} 
