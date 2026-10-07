@@ -1,7 +1,17 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { CarrerasSelector } from './CarrerasSelector';
 
-export const FormularioAlumno = ({ nombre, setNombre, calificacion, setCalificacion, onAgregar, mensajeEstado }) => {
+export const FormularioAlumno = ({ 
+  nombre, 
+  setNombre, 
+  calificacion, 
+  setCalificacion, 
+  carrera, 
+  setCarrera, 
+  onAgregar, 
+  mensajeEstado 
+}) => {
   return (
     <View style={styles.card}>
       <Text style={styles.label}>Nombre del Alumno:</Text>
@@ -10,6 +20,12 @@ export const FormularioAlumno = ({ nombre, setNombre, calificacion, setCalificac
         placeholder="Ej. Juan Pérez"
         value={nombre}
         onChangeText={setNombre}
+      />
+
+      {/* Componente Modular Independiente de Carrera */}
+      <CarrerasSelector 
+        carreraSeleccionada={carrera} 
+        setCarrera={setCarrera} 
       />
 
       <Text style={styles.label}>Calificación (0 - 100):</Text>
