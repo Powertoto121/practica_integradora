@@ -1,0 +1,32 @@
+name: Node.js CI - Practica React Native
+
+# Se ejecuta en cada push o pull request a la rama main
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Copiar el repositorio en el runner
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    # 2. Configurar el entorno de Node.js
+    - name: Configurar Node.js v20
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    # 3. Instalar dependencias del proyecto
+    - name: Instalar dependencias
+      run: npm ci
+
+    # 4. Verificación rápida de estado del proyecto
+    - name: Verificar configuración del proyecto
+      run: npx expo doctor || truegit
